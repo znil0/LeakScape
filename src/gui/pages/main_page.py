@@ -1,0 +1,124 @@
+# PÁGINA PRINCIPAL
+
+import flet as ft
+import asyncio
+
+from style.colors import THEME_COLORS
+from style.component_styles import COMPONENT_STYLES
+
+
+def view(page: ft.Page):
+    page.controls.clear()
+    page.bgcolor = THEME_COLORS["background"]
+
+    # MENÚ
+    # -----------------------------------------------------------------------------------------------
+    menu_layout = ft.Container(
+        content=ft.Column(
+            [
+                ft.Container(height=30),
+                ft.Text(
+                    value="MENÚ",
+                    color=THEME_COLORS["text"],
+                    font_family="Archivo",
+                    weight="bold",
+                    size=34,
+                    margin=ft.Margin(30, 0, 0, 0),
+                ),
+                ft.Divider(
+                    color=THEME_COLORS["text50"],
+                ),
+                ft.Container(height=20),
+                ft.Button(
+                    "INICIO",
+                    on_click=lambda _: asyncio.create_task(page.push_route("/")),
+                    **COMPONENT_STYLES["menu_button"],
+                ),
+                ft.Button(
+                    "MAPAS",
+                    on_click=lambda _: asyncio.create_task(page.push_route("/")),
+                    **COMPONENT_STYLES["menu_button"],
+                ),
+                ft.Button(
+                    "CERRAR",
+                    on_click=lambda _: asyncio.create_task(page.push_route("/")),
+                    **COMPONENT_STYLES["menu_button"],
+                ),
+            ],
+            spacing=0,
+            expand=True,
+        ),
+        **COMPONENT_STYLES["side_menu_style"],
+    )
+
+    # TÍTULO
+    # -----------------------------------------------------------------------------------------------
+    title_layout = ft.Container(
+        content=ft.Text(
+            value="LeakScape",
+            color=THEME_COLORS["accent"],
+            size=55,
+            weight="bold",
+            font_family="Jost",
+        ),
+        **COMPONENT_STYLES["section_block_invisible_style"],
+    )
+
+    desc_layout = ft.Container(
+        content=ft.Column(
+            controls=[
+                ft.Text(
+                    value="Integrantes",
+                    size=22,
+                    weight="bold",
+                    color=THEME_COLORS["background"],
+                    text_align=ft.TextAlign.CENTER,
+                ),
+                ft.Text(
+                    value="Arregla fugas antes de que ocurran.",
+                    font_family="DM Sans 14pt",
+                    size=24,
+                    color=THEME_COLORS["text"],
+                    text_align=ft.TextAlign.CENTER,
+                ),
+            ],
+            spacing=0,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        ),
+        alignment=ft.Alignment.CENTER,
+        **COMPONENT_STYLES["section_block_invisible_style"],
+    )
+
+    cover_layout = ft.Container(
+        content=ft.Column(
+            [
+                title_layout,
+                desc_layout,
+                ft.Container(height=100),
+            ],
+            spacing=0,
+            scroll=ft.ScrollMode.AUTO,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        ),
+        padding=40,
+        **COMPONENT_STYLES["section_block_invisible_style"],
+    )
+
+    # ------------------------- FINAL LAYOUT --------------------------------------
+    content = ft.View(
+        expand=True,
+        bgcolor=THEME_COLORS["background"],
+        padding=0,
+        controls=[
+            ft.Row(
+                controls=[
+                    menu_layout,
+                    cover_layout,
+                ],
+                spacing=0,
+                expand=True,
+            ),
+        ],
+    )
+
+    return content
