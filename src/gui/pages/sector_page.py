@@ -74,21 +74,129 @@ def view(page: ft.Page):
         **COMPONENT_STYLES["section_block_invisible_style"],
     )
 
+    # TABLAS
+
+    dtable_local = ft.DataTable(
+        bgcolor=THEME_COLORS["primary20"],
+        columns=[
+            ft.DataColumn(
+                label=ft.Text(
+                    "Localidad",
+                    font_family="DM Sans 14pt",
+                    weight="bold",
+                    color=THEME_COLORS["accent"],
+                )
+            ),
+            ft.DataColumn(
+                label=ft.Text(
+                    "Tuberías Principales",
+                    font_family="DM Sans 14pt",
+                    weight="bold",
+                    color=THEME_COLORS["accent"],
+                )
+            ),
+            ft.DataColumn(
+                label=ft.Text(
+                    "Tuberías Secundarias",
+                    font_family="DM Sans 14pt",
+                    weight="bold",
+                    color=THEME_COLORS["accent"],
+                )
+            ),
+            ft.DataColumn(
+                label=ft.Text(
+                    "Coeficiente de Importancia",
+                    font_family="DM Sans 14pt",
+                    weight="bold",
+                    color=THEME_COLORS["accent"],
+                )
+            ),
+        ],
+        rows=[],
+        horizontal_lines=ft.BorderSide(width=1, color=THEME_COLORS["accent40"]),
+        vertical_lines=ft.BorderSide(width=1, color=THEME_COLORS["accent40"]),
+        margin=ft.Margin(10, 30, 10, 30),
+        width=float("inf"),
+    )
+
+    def add_to_table(localidad, c_principales, c_secundarias, importancia):
+        dtable_local.rows.append(
+            ft.DataRow(
+                cells=[
+                    ft.DataCell(
+                        ft.Text(
+                            localidad,
+                            color=THEME_COLORS["text"],
+                            font_family="DM Sans 14pt",
+                        )
+                    ),
+                    ft.DataCell(
+                        ft.Text(
+                            c_principales,
+                            color=THEME_COLORS["text"],
+                            font_family="DM Sans 14pt",
+                        )
+                    ),
+                    ft.DataCell(
+                        ft.Text(
+                            c_secundarias,
+                            color=THEME_COLORS["text"],
+                            font_family="DM Sans 14pt",
+                        )
+                    ),
+                    ft.DataCell(
+                        ft.Text(
+                            importancia,
+                            color=THEME_COLORS["text"],
+                            font_family="DM Sans 14pt",
+                        )
+                    ),
+                ],
+            ),
+        )
+        page.update()
+
+    for i in range(0, 7):
+        add_to_table('Colonia "Las Brisas"', "13", "71", f"{5 + i} (Baja importancia)")
+        add_to_table('Colonia "Las Brisas"', "13", "71", f"{31 + i} (Alta importancia)")
+
     cover_layout = ft.Container(
         content=ft.Column(
             [
                 ft.Text(
-                    value="Sector",
-                    size=26,
+                    value=f"SECTOR S0{page.sector_index + 4}",
+                    size=38,
                     weight="bold",
+                    font_family="Archivo",
                     color=THEME_COLORS["accent"],
                     text_align=ft.TextAlign.CENTER,
                 ),
-                ft.Container(height=100),
+                ft.Container(height=50),
+                ft.Row(
+                    controls=[
+                        ft.Text(
+                            value="LOCALIDADES EN EL SECTOR",
+                            size=18,
+                            font_family="Archivo",
+                            color=THEME_COLORS["accent"],
+                            weight="bold",
+                        ),
+                        ft.Divider(
+                            expand=True, thickness=1, color=THEME_COLORS["accent40"]
+                        ),
+                    ]
+                ),
+                ft.Text(
+                    value="La siguiente tabla muestra las localidades en el sector y la cantidad de tuberías que la abastecen. Se ordenan por orden de importancia según el estado de las tuberías.",
+                    size=14,
+                    font_family="DM Sans 14pt",
+                    color=THEME_COLORS["accent"],
+                ),
+                dtable_local,
             ],
+            height=float("inf"),
             spacing=0,
             scroll=ft.ScrollMode.AUTO,
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         ),
         padding=40,
         **COMPONENT_STYLES["section_block_invisible_style"],

@@ -95,19 +95,28 @@ def view(page: ft.Page):
     )
 
     def sector_changed(e: ft.Event[ft.SegmentedButton]):
+        if not e.control.selected:
+            return
         op = e.control.selected[0]
         index = int(op) - 4
+
+        page.sector_index = index
+
         sector_image.src = segmentos_img[index]
         print(segmentos_img[index])
         page.update()
 
     sector_button = ft.SegmentedButton(
-        selected=["4"],  # Inicialmente ninguna opción seleccionada
+        selected=[
+            f"{page.sector_index + 4}"
+        ],  # Inicialmente ninguna opción seleccionada
         on_change=sector_changed,
         allow_empty_selection=True,  # Permitir que no haya ninguna selección
         allow_multiple_selection=False,  # Selección única (solo una opción)
         segments=segmentos,
     )
+
+    sector_image.src = segmentos_img[page.sector_index]
 
     cover_layout = ft.Container(
         content=ft.Row(
@@ -167,6 +176,9 @@ def view(page: ft.Page):
                             ),
                             color=THEME_COLORS["accent"],
                             margin=20,
+                            on_click=lambda _: asyncio.create_task(
+                                page.push_route("/sector/desc")
+                            ),
                         ),
                     ],
                     expand=True,

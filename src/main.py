@@ -7,15 +7,15 @@ import asyncio
 # Imports: Aquí se importan las páginas para su indexado.
 from gui.pages.main_page import view as main_view
 from gui.pages.map_page import view as map_view
+from gui.pages.map_desc_page import view as map_desc_view
 from gui.pages.sector_page import view as sector_view
 from gui.pages.local_page import view as local_view
 from gui.pages.splashscreen import view as splashscreen_view
 
-sector_index = 0
-local_index = 0
-
 
 async def main(page: ft.Page):
+    page.sector_index = 0
+    page.local_index = 0
 
     ## SPLASHSCREEN
 
@@ -37,7 +37,7 @@ async def main(page: ft.Page):
             page.views.append(sector_view(page))
 
         if page.route == "/sector/desc":
-            page.views.append(main_view(page))
+            page.views.append(map_desc_view(page))
 
         if page.route == "/local":
             page.views.append(local_view(page))
