@@ -35,13 +35,45 @@ COMPONENT_STYLES: dict = {
     "menu_button": {
         "width": float("inf"),
         "style": ft.ButtonStyle(
-            color=THEME_COLORS["accent70"],
+            color=THEME_COLORS["accent80"],
             bgcolor=THEME_COLORS["background"],
             # side=ft.BorderSide(1, THEME_COLORS["text"]),
             shape=ft.RoundedRectangleBorder(radius=5),
             text_style=ft.TextStyle(
                 size=16,
                 color=THEME_COLORS["text"],
+                font_family="Archivo",
+                weight="bold",
+            ),
+        ),
+        "margin": ft.Margin(30, 6, 0, 6),
+    },
+    "menu_button_disabled": {
+        "width": float("inf"),
+        "style": ft.ButtonStyle(
+            color=THEME_COLORS["accent40"],
+            bgcolor=THEME_COLORS["background"],
+            # side=ft.BorderSide(1, THEME_COLORS["text"]),
+            shape=ft.RoundedRectangleBorder(radius=5),
+            text_style=ft.TextStyle(
+                size=16,
+                color=THEME_COLORS["text50"],
+                font_family="Archivo",
+                weight="bold",
+            ),
+        ),
+        "margin": ft.Margin(30, 6, 0, 6),
+    },
+    "menu_button_selected": {
+        "width": float("inf"),
+        "style": ft.ButtonStyle(
+            color=THEME_COLORS["background"],
+            bgcolor=THEME_COLORS["accent"],
+            # side=ft.BorderSide(1, THEME_COLORS["text"]),
+            shape=ft.RoundedRectangleBorder(radius=5),
+            text_style=ft.TextStyle(
+                size=16,
+                color=THEME_COLORS["background"],
                 font_family="Archivo",
                 weight="bold",
             ),

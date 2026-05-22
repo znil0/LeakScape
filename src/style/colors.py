@@ -12,5 +12,6 @@ THEME_COLORS = {
     "primary50": ft.Colors.with_opacity(0.5, "#87C0CD"),
     "secondary": "#F0F0DB",
     "accent": "#30364F",
-    "accent70": ft.Colors.with_opacity(0.7, "#30364F"),
+    "accent80": ft.Colors.with_opacity(0.8, "#30364F"),
+    "accent40": ft.Colors.with_opacity(0.4, "#30364F"),
 }

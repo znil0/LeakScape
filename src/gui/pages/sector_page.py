@@ -33,7 +33,7 @@ def view(page: ft.Page):
                 ft.Button(
                     "INICIO",
                     on_click=lambda _: asyncio.create_task(page.push_route("/")),
-                    **COMPONENT_STYLES["menu_button_selected"],
+                    **COMPONENT_STYLES["menu_button"],
                 ),
                 ft.Button(
                     "MAPA",
@@ -43,12 +43,12 @@ def view(page: ft.Page):
                 ft.Button(
                     "SECTOR",
                     disabled=True,
-                    **COMPONENT_STYLES["menu_button_disabled"],
+                    **COMPONENT_STYLES["menu_button_selected"],
                 ),
                 ft.Button(
                     "LOCALIDAD",
-                    disabled=True,
-                    **COMPONENT_STYLES["menu_button_disabled"],
+                    on_click=lambda _: asyncio.create_task(page.push_route("/local")),
+                    **COMPONENT_STYLES["menu_button"],
                 ),
                 ft.Button(
                     "CERRAR",
@@ -74,41 +74,16 @@ def view(page: ft.Page):
         **COMPONENT_STYLES["section_block_invisible_style"],
     )
 
-    desc_layout = ft.Container(
-        content=ft.Column(
-            controls=[
-                ft.Text(
-                    value="Integrantes",
-                    size=22,
-                    weight="bold",
-                    color=THEME_COLORS["background"],
-                    text_align=ft.TextAlign.CENTER,
-                ),
-                ft.Text(
-                    value="Arregla las fugas antes de que ocurran.",
-                    font_family="DM Sans 14pt",
-                    size=24,
-                    color=THEME_COLORS["text"],
-                    text_align=ft.TextAlign.CENTER,
-                ),
-            ],
-            spacing=0,
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-        ),
-        alignment=ft.Alignment.CENTER,
-        **COMPONENT_STYLES["section_block_invisible_style"],
-    )
-
     cover_layout = ft.Container(
         content=ft.Column(
             [
-                ft.Image(
-                    src="logo.png",
-                    width=150,
-                    height=150,
+                ft.Text(
+                    value="Sector",
+                    size=26,
+                    weight="bold",
+                    color=THEME_COLORS["accent"],
+                    text_align=ft.TextAlign.CENTER,
                 ),
-                title_layout,
-                desc_layout,
                 ft.Container(height=100),
             ],
             spacing=0,

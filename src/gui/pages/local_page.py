@@ -1,4 +1,4 @@
-# PÁGINA PRINCIPAL
+# PÁGINA DE AREAS LOCALES
 
 import flet as ft
 import asyncio
@@ -33,7 +33,7 @@ def view(page: ft.Page):
                 ft.Button(
                     "INICIO",
                     on_click=lambda _: asyncio.create_task(page.push_route("/")),
-                    **COMPONENT_STYLES["menu_button_selected"],
+                    **COMPONENT_STYLES["menu_button"],
                 ),
                 ft.Button(
                     "MAPA",
@@ -42,13 +42,13 @@ def view(page: ft.Page):
                 ),
                 ft.Button(
                     "SECTOR",
-                    disabled=True,
-                    **COMPONENT_STYLES["menu_button_disabled"],
+                    on_click=lambda _: asyncio.create_task(page.push_route("/sector")),
+                    **COMPONENT_STYLES["menu_button"],
                 ),
                 ft.Button(
                     "LOCALIDAD",
                     disabled=True,
-                    **COMPONENT_STYLES["menu_button_disabled"],
+                    **COMPONENT_STYLES["menu_button_selected"],
                 ),
                 ft.Button(
                     "CERRAR",
